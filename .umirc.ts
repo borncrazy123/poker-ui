@@ -13,11 +13,11 @@ export default defineConfig({
   routes: [
     {
       path: '/',
-      redirect: '/poker',
+      redirect: '/index',
     },
     {
       name: '桌面',
-      path: '/poker',
+      path: '/index',
       component: './Poker',
       // 不展示顶栏
       headerRender: false,
