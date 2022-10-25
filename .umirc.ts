@@ -4,6 +4,13 @@ export default defineConfig({
   antd: {},
   access: {},
   model: {},
+  proxy: {
+    '/api': {
+      'target': 'http://127.0.0.1:7001/',
+      'changeOrigin': true,
+      'pathRewrite': { '^/api' : '/api' },
+    },
+  },
   initialState: {},
   request: {},
   publicPath: '/public/umi/',
