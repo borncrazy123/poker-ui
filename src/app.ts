@@ -14,6 +14,8 @@ export const layout = () => {
     },
     contentStyle: {
       padding: '0px',
+      border: '5px solid #555a64',
+      height: document.body.scrollHeight,
     },
   };
 };

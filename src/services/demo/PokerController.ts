@@ -6,7 +6,6 @@ export async function shuffle(
   params: {
   },
 ) {
-  // http://127.0.0.1:7001
   return request('/api/shuffle', {
     method: 'GET',
     params: {
@@ -14,3 +13,28 @@ export async function shuffle(
     },
   });
 }
+
+export async function deskList(
+  params: {
+  },
+) {
+  return request('/api/deskList', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+  });
+}
+
+export async function loginPersonList(
+  params: {
+  },
+) {
+  return request('/api/loginPersonList', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+  });
+}
+
