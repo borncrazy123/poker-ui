@@ -10,6 +10,11 @@ export default defineConfig({
       'changeOrigin': true,
       'pathRewrite': { '^/api' : '/api' },
     },
+    '/public/img': {
+      'target': 'http://127.0.0.1:7001/',
+      'changeOrigin': true,
+      'pathRewrite': { '' : '' },
+    },
   },
   initialState: {},
   request: {},

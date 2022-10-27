@@ -14,11 +14,11 @@ export async function shuffle(
   });
 }
 
-export async function deskList(
+export async function getDeskList(
   params: {
   },
 ) {
-  return request('/api/deskList', {
+  return request('/api/getDeskList', {
     method: 'GET',
     params: {
       ...params,
@@ -38,3 +38,15 @@ export async function loginPersonList(
   });
 }
 
+export async function getCurrentDeskPersonList(
+  params: {
+    id: Number
+  },
+) {
+  return request('/api/getCurrentDeskPersonList', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+  });
+}

@@ -16,6 +16,7 @@ export const layout = () => {
       padding: '0px',
       border: '5px solid #555a64',
       height: document.body.scrollHeight,
+      overflow: 'hidden',
     },
   };
 };
