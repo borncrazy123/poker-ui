@@ -127,15 +127,17 @@ const PokerPage: React.FC = () => {
             </Button>
 
           </div>
-          <div style={{ paddingLeft: '5px', border: '1px solid skyblue', height: '40px', lineHeight: '37px' }}>
-            {loginPersonListItems}
+          <div style={{ paddingLeft: '5px', paddingTop: '2px', border: '1px solid skyblue', height: '40px', lineHeight: '40px' }}>
+            <Avatar.Group maxCount={8}>
+              {loginPersonListItems}
+            </Avatar.Group>
           </div>
         </Col>
       </Row>
 
       <div style={{ height: '50px' }}></div>
 
-      <div style={{ width: '100%', border: '0px solid red', overflowX: 'hidden' }}>
+      <div style={{ width: '100%', border: '0px solid red', overflowX: 'hidden', overflowWrap: 'anywhere' }}>
         {pokers.length == 0 ? '' : '洗过后的牌：' + JSON.stringify(pokers)}
       </div>
       {personPokersItems}
