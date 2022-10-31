@@ -3,11 +3,17 @@ import React, { useState, useEffect } from 'react';
 import { Image, List } from 'antd-mobile';
 import services from '@/services/demo';
 
-const { shuffle, getDeskList, loginPersonList, getCurrentDeskPersonList } = services.PokerController;
+const { getCurrentDeskPersonList } = services.PokerController;
 
 const DeskPage: React.FC = (props) => {
-  const [Current_Dest_Person_List, setCurrentDeskPersonList] = useState([]);
-  const { deskInfo } = props;
+  const [Current_Dest_Person_List, setCurrentDeskPersonList] = useState([{name: ''}]);
+  let { deskInfo } = props;
+  if (deskInfo == undefined) {
+    deskInfo = {
+      id: -1,
+      name: '请先进入桌子......',
+    };
+  }
 
   useEffect(() => {
     const init = async () => {

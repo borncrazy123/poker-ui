@@ -14,6 +14,31 @@ export async function shuffle(
   });
 }
 
+// export async function createDesk(
+//   params: {
+//     deskInfo
+//   },
+// ) {
+//   return request('/api/createDesk', {
+//     method: 'POST',
+//     params: {
+//       ...params,
+//     },
+//   });
+// }
+
+export async function createDesk(
+  deskInfo,
+) {
+  return request('api/createDesk', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: deskInfo,
+  });
+}
+
 export async function getDeskList(
   params: {
   },

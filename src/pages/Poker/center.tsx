@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-import { Image, List } from 'antd-mobile';
+import { Image, List, Button } from 'antd-mobile';
 
 import services from '@/services/demo';
 import styles from './index.less';
 
-const { shuffle, getDeskList, loginPersonList, getCurrentDeskPersonList } = services.PokerController;
+const { shuffle, createDesk, getDeskList, loginPersonList, getCurrentDeskPersonList } = services.PokerController;
 
 const CenterPage: React.FC = (props) => {
   const [Desk_List, setDeskList] = useState([]);
@@ -20,6 +20,14 @@ const CenterPage: React.FC = (props) => {
     init();
 
   }, []);
+
+  const createDeskInfo = async() => {
+    return;
+    const deskInfo = await createDesk( {
+      name: '桌子1',
+      desc: '',
+    });
+  }
 
   // 处理所有桌子情况
   let deskListItems = [];
@@ -37,33 +45,43 @@ const CenterPage: React.FC = (props) => {
 
   return (
 
-        <div style={{ width: '100%', height: '100%', overflowY: 'scroll' }}>
+    <div style={{ width: '100%', height: '100%', overflowY: 'scroll' }}>
 
-          <List header='桌子列表' style={{ height: '200px' }}>
-            {deskListItems.map(deskItem => (
-              <List.Item
-                key={deskItem.name}
-                prefix={
-                  <Image
-                    src={deskItem.avatar}
-                    // style={{ borderRadius: 20 }}
-                    fit='cover'
-                    width={40}
-                    height={40}
-                  />
-                }
-                description={deskItem.description}
-                onClick={(e) => {
-                  // console.log('e:', e, deskItem.name);
-                  props.remoteRouteActive(deskItem);
-                }}
-              >
-                {deskItem.name}
-              </List.Item>
-            ))}
-          </List>
-
+      <List header={
+        <div>
+          桌子列表
+          <Button size='mini' color='primary' onClick={() => {
+              createDeskInfo();
+            }}
+          >
+            新建
+          </Button>
         </div>
+      } style={{ height: '200px' }}>
+        {deskListItems.map(deskItem => (
+          <List.Item
+            key={deskItem.name}
+            prefix={
+              <Image
+                src={deskItem.avatar}
+                // style={{ borderRadius: 20 }}
+                fit='cover'
+                width={40}
+                height={40}
+              />
+            }
+            description={deskItem.description}
+            onClick={(e) => {
+              // console.log('e:', e, deskItem.name);
+              props.remoteRouteActive(deskItem);
+            }}
+          >
+            {deskItem.name}
+          </List.Item>
+        ))}
+      </List>
+
+    </div>
 
   );
 
