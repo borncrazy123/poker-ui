@@ -1,33 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useModel } from '@umijs/max';
 
 import { Image, List, Button } from 'antd-mobile';
-
-import services from '@/services/demo';
 import styles from './index.less';
 
-const { shuffle, createDesk, getDeskList, loginPersonList, getCurrentDeskPersonList } = services.PokerController;
-
 const CenterPage: React.FC = (props) => {
-  const [Desk_List, setDeskList] = useState([]);
-
-  useEffect(() => {
-    const init = async () => {
-      const deskList = await getDeskList();
-      // console.log('deskList:', deskList);
-      setDeskList(deskList);
-
-    }
-    init();
-
-  }, []);
-
-  const createDeskInfo = async() => {
-    return;
-    const deskInfo = await createDesk( {
-      name: '桌子1',
-      desc: '',
-    });
-  }
+  // 从逻辑模型里导出逻辑
+  const { Desk_List, createDeskInfo } = useModel('center_model');
+  const { setTabbarActiveKeyInfo } = useModel('index_model');
+  const { setDeskInfoCallback } = useModel('desk_model');
 
   // 处理所有桌子情况
   let deskListItems = [];
@@ -51,8 +32,8 @@ const CenterPage: React.FC = (props) => {
         <div>
           桌子列表
           <Button size='mini' color='primary' onClick={() => {
-              createDeskInfo();
-            }}
+            createDeskInfo();
+          }}
           >
             新建
           </Button>
@@ -72,8 +53,8 @@ const CenterPage: React.FC = (props) => {
             }
             description={deskItem.description}
             onClick={(e) => {
-              // console.log('e:', e, deskItem.name);
-              props.remoteRouteActive(deskItem);
+              setDeskInfoCallback(deskItem);
+              setTabbarActiveKeyInfo('/desk');
             }}
           >
             {deskItem.name}

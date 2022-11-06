@@ -1,30 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useModel } from '@umijs/max';
 
 import { Image, List } from 'antd-mobile';
-import services from '@/services/demo';
-
-const { getCurrentDeskPersonList } = services.PokerController;
 
 const DeskPage: React.FC = (props) => {
-  const [Current_Dest_Person_List, setCurrentDeskPersonList] = useState([{name: ''}]);
-  let { deskInfo } = props;
-  if (deskInfo == undefined) {
-    deskInfo = {
-      id: -1,
-      name: '请先进入桌子......',
-    };
-  }
+  const { Current_Dest_Person_List, getCurrentDeskPersonListInfo, Desk_Info } = useModel('desk_model');
 
-  useEffect(() => {
-    const init = async () => {
-      const currentDestPersonList = await getCurrentDeskPersonList({ id: deskInfo.id + 1 });
-      // console.log('currentDestPersonList:', currentDestPersonList);
-      setCurrentDeskPersonList(currentDestPersonList);
-
-    }
-    init();
-
-  }, []);
+  // 获取桌上的用户信息 
+  getCurrentDeskPersonListInfo(Desk_Info);
 
   // 处理当前桌子用户的情况
   let loginPersonListItems = [];
@@ -44,7 +27,7 @@ const DeskPage: React.FC = (props) => {
 
     <div style={{ width: '100%', height: '100%', overflowY: 'scroll' }}>
 
-      <List header={deskInfo.name} style={{ height: '200px' }}>
+      <List header={Desk_Info.name} style={{ height: '200px' }}>
         {loginPersonListItems.map(person => (
           <List.Item
             key={person.name}

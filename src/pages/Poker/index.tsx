@@ -1,4 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React from 'react';
+import { useModel } from '@umijs/max';
 
 import { NavBar, TabBar, Badge, Image, List } from 'antd-mobile';
 import {
@@ -7,71 +8,15 @@ import {
   UnorderedListOutline,
   UserOutline,
 } from 'antd-mobile-icons';
-
 import services from '@/services/demo';
-
 import styles from './index.less';
-
 import CenterPage from './center';
 import DeskPage from './desk';
 
 const { shuffle, getDeskList, loginPersonList, getCurrentDeskPersonList } = services.PokerController;
 
 const PokerPage: React.FC = () => {
-  // const { name } = useModel('global');
-
-  // 此函数必须放在前面初始化
-  const setRemoteRouteActive = (deskInfo) => {
-    console.log('deskInfo:', deskInfo);
-    setRouteActive('/desk', deskInfo);
-  }
-
-  const [pokers, setPokers] = useState([]);
-  const [personPokers, setPersonPokers] = useState([]);
-  const [bankerPokers, setBankerPokers] = useState([]);
-  const [Desk_List, setDeskList] = useState([]);
-  // const [Current_Dest_Person_List, setCurrentDeskPersonList] = useState([]);
-  const [Tabbar_Active_Key, setTabbarActiveKey] = useState('/home');
-  const [Body_Page, setBodyPage] = useState(<CenterPage remoteRouteActive = {setRemoteRouteActive} />);
-
-  // useEffect(() => {
-  //   const init = async () => {
-  //     const currentDestPersonList = await getCurrentDeskPersonList({ id: 1 });
-  //     // console.log('currentDestPersonList:', currentDestPersonList);
-  //     setCurrentDeskPersonList(currentDestPersonList);
-
-  //   }
-  //   init();
-
-  // }, []);
-
-  // // 处理所有登陆用户情况
-  // let loginPersonListItems = [];
-  // for (let i = 0; i < Current_Dest_Person_List.length; i++) {
-  //   loginPersonListItems.push(
-  //     <>
-  //       <Avatar style={{ color: 'white', backgroundColor: 'rgb(242 110 9)' }}>{Current_Dest_Person_List[i].name.substr(0, 1)}</Avatar>
-  //       <span style={{ padding: '2px' }} />
-  //     </>
-  //   );
-  // }
-
-  // let personPokersItems = [];
-  // for (let k = 0; k < personPokers.length; k++) {
-  //   personPokersItems.push(<div>第 {k} 个人的牌是：{JSON.stringify(personPokers[k])}</div>);
-  // }
-
-  const setRouteActive = (value: string, tag: object) => {
-    console.log('setRouteActive:value:', value, tag);
-    if ('/home' == value) {
-      setBodyPage(<CenterPage remoteRouteActive = {setRemoteRouteActive} />);
-    } else if ('/desk' == value) {
-      setBodyPage(<DeskPage deskInfo = {tag} />);
-    } else {
-      setBodyPage(<CenterPage />);
-    }
-    setTabbarActiveKey(value);
-  }
+  const { Tabbar_Active_Key, setTabbarActiveKeyInfo } = useModel('index_model');
 
   const tabs = [
     {
@@ -97,6 +42,11 @@ const PokerPage: React.FC = () => {
     },
   ];
 
+  let Body_Page = <CenterPage />;
+  if ('/desk' == Tabbar_Active_Key) {
+    Body_Page = <DeskPage />
+  }
+
   return (
     <div className={styles.app}>
       <div className={styles.top}>
@@ -106,7 +56,7 @@ const PokerPage: React.FC = () => {
         {Body_Page}
       </div>
       <div className={styles.bottom}>
-        <TabBar activeKey={Tabbar_Active_Key} onChange={value => setRouteActive(value)}>
+        <TabBar activeKey={Tabbar_Active_Key} onChange={value => setTabbarActiveKeyInfo(value)}>
           {tabs.map(item => (
             <TabBar.Item key={item.key} icon={item.icon} title={item.title} badge={item.badge} />
           ))}
