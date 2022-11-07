@@ -51,6 +51,18 @@ export async function getDeskList(
   });
 }
 
+export async function enterDeskByDid(
+  deskInfo,
+) {
+  return request('api/enterDeskByDid', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: deskInfo,
+  });
+}
+
 export async function loginPersonList(
   params: {
   },

@@ -1,36 +1,44 @@
-// 全局共享数据示例
-import { DEFAULT_NAME } from '@/constants';
 import { useState, useEffect, useCallback } from 'react';
 import services from '@/services/demo';
 
-const { shuffle, createDesk, getDeskList, loginPersonList, getCurrentDeskPersonList } = services.PokerController;
+const { createDesk, getDeskList, enterDeskByDid, } = services.PokerController;
 
 const center = () => {
   const [Desk_List, setDeskList] = useState([]);
 
   useEffect(() => {
     const init = async () => {
-      const deskList = await getDeskList();
-      // console.log('deskList:', deskList);
-      setDeskList(deskList);
-
+      refreshDeskInfoCallback();
     }
     init();
 
   }, []);
 
+  // 刷新桌子列表
+  const refreshDeskInfoCallback = useCallback(async () => {
+    const deskList = await getDeskList();
+    // console.log('deskList:', deskList);
+    setDeskList(deskList);
+  }, []);
+
   // 新建桌子
   const createDeskInfo = useCallback(async () => {
-    return;
     const deskInfo = await createDesk({
-      name: '桌子3',
+      name: '桌子_' + new Date().getTime(),
       desc: '',
     });
+    refreshDeskInfoCallback();
+  }, []);
+
+  // 玩家进入桌子
+  const enterDeskByDidCallback = useCallback(async (_deskItem) => {
+    const deskInfo = await enterDeskByDid(_deskItem);
   }, []);
 
   return {
     Desk_List,
     createDeskInfo,
+    enterDeskByDidCallback,
   };
 };
 

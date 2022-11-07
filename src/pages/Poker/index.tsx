@@ -13,10 +13,18 @@ import styles from './index.less';
 import CenterPage from './center';
 import DeskPage from './desk';
 
-const { shuffle, getDeskList, loginPersonList, getCurrentDeskPersonList } = services.PokerController;
+// const { shuffle, getDeskList, loginPersonList, getCurrentDeskPersonList } = services.PokerController;
 
 const PokerPage: React.FC = () => {
   const { Tabbar_Active_Key, setTabbarActiveKeyInfo } = useModel('index_model');
+
+  // console.log('window.orientation:', window.orientation);
+  // if (window.orientation == 180 || window.orientation == 0) {
+  //   console.log("竖屏状态！")
+  // }
+  // if (window.orientation == 90 || window.orientation == -90) {
+  //   console.log("横屏状态！")
+  // }
 
   const tabs = [
     {
