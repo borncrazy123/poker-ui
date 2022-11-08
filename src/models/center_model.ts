@@ -5,6 +5,8 @@ const { createDesk, getDeskList, enterDeskByDid, } = services.PokerController;
 
 const center = () => {
   const [Desk_List, setDeskList] = useState([]);
+  const [visible, setVisible] = useState(false);
+  const [deskItem, setDeskItem] = useState([]);
 
   useEffect(() => {
     const init = async () => {
@@ -33,12 +35,17 @@ const center = () => {
   // 玩家进入桌子
   const enterDeskByDidCallback = useCallback(async (_deskItem) => {
     const deskInfo = await enterDeskByDid(_deskItem);
+    setVisible(false);
+    setDeskItem(_deskItem);
   }, []);
 
   return {
     Desk_List,
     createDeskInfo,
     enterDeskByDidCallback,
+    visible,
+    setVisible,
+    deskItem,
   };
 };
 
