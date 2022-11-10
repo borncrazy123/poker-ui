@@ -7,6 +7,7 @@ import styles from './index.less';
 
 const DeskPage: React.FC = (props) => {
   const { Current_Dest_Person_List, getCurrentDeskPersonListInfo, Desk_Info } = useModel('desk_model');
+  const { loginUserInfo } = useModel('index_model');
 
   // 获取桌上的用户信息 
   getCurrentDeskPersonListInfo(Desk_Info);
@@ -58,7 +59,7 @@ const DeskPage: React.FC = (props) => {
 
       <div style={{ height: '120px', margin: '-120px 0 0' }}>
         <div style={{ height: '100%', border: '0px solid blue', padding: '15px 0 0 15px' }}>
-          <div>当前桌子：{Desk_Info.name}</div>
+          <div>当前桌子：{Desk_Info.name} <Divider direction='vertical' /> 当前用户：{loginUserInfo.username}</div>
           <Space block wrap>
             {loginPersonListItems.map(person => (
               <div style={{ textAlign: 'center' }}><Avatar src={demoAvatarImages[0]} />{person.name}</div>
@@ -71,26 +72,131 @@ const DeskPage: React.FC = (props) => {
       <div style={{ border: '0px solid red', width: '100%', height: '100%' }}>
 
         <table className={styles.desktable}>
-          <tr><td>1</td><td style={{ width: '60%', height: '100px', textAlign: 'center' }}>2</td><td>3</td></tr>
-          <tr><td>11</td><td rowSpan={2} style={{ textAlign: '-webkit-center' }}>
-            <div style={{ border: '0px solid red', width: '50px' }}>
-              <Space direction='vertical'>
-                <img style={{ transform: 'rotate(90deg)' }} src="/public/img/poker/heart_1.jpg" width="42" height="42"></img>
-                <img style={{ transform: 'rotate(90deg)' }} src="/public/img/poker/heart_2.jpg" width="42" height="42"></img>
-                <img style={{ transform: 'rotate(90deg)' }} src="/public/img/poker/heart_3.jpg" width="42" height="42"></img>
-                <img style={{ transform: 'rotate(90deg)' }} src="/public/img/poker/heart_4.jpg" width="42" height="42"></img>
-                <img style={{ transform: 'rotate(90deg)' }} src="/public/img/poker/heart_5.jpg" width="42" height="42"></img>
+          <tr>
+            <td>
+              {
+                loginPersonListItems[4] != undefined
+                  ?
+                  <>
+                    <Avatar style={{ '--size': '32px', display: 'inline-flex' }} src={demoAvatarImages[0]} />
+                    <div>{loginPersonListItems[4].name}</div>
+                  </>
+                  :
+                  <div style={{ width: '32px' }} />
+              }
+            </td>
+            <td style={{ height: '100px', textAlign: 'center' }}>
+              {
+                loginPersonListItems[5] != undefined
+                  ?
+                  <>
+                    <Avatar style={{ '--size': '32px', display: 'inline-flex' }} src={demoAvatarImages[0]} />
+                    <div>{loginPersonListItems[5].name}</div>
+                  </>
+                  :
+                  <div style={{ width: '32px' }} />
+              }
+            </td>
+            <td>
+              {
+                loginPersonListItems[6] != undefined
+                  ?
+                  <>
+                    <Avatar style={{ '--size': '32px', display: 'inline-flex' }} src={demoAvatarImages[0]} />
+                    <div>{loginPersonListItems[6].name}</div>
+                  </>
+                  :
+                  <div style={{ width: '32px' }} />
+              }
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {
+                loginPersonListItems[3] != undefined
+                  ?
+                  <>
+                    <Avatar style={{ '--size': '32px', display: 'inline-flex' }} src={demoAvatarImages[0]} />
+                    <div>{loginPersonListItems[3].name}</div>
+                  </>
+                  :
+                  <div style={{ width: '32px' }} />
+              }
+            </td>
+            <td rowSpan={2} style={{ textAlign: '-webkit-center', width: '60%' }}>
+              <div style={{ border: '0px solid red', width: '50px' }}>
+                <Space direction='vertical' style={{ '--gap': '-10px' }}>
+                  <img className={styles.deskpokerimg} src="/public/img/poker/heart_1.jpg" />
+                  <img className={styles.deskpokerimg} src="/public/img/poker/heart_2.jpg" />
+                  <img className={styles.deskpokerimg} src="/public/img/poker/heart_3.jpg" />
+                  <img className={styles.deskpokerimg} src="/public/img/poker/heart_4.jpg" />
+                  <img className={styles.deskpokerimg} src="/public/img/poker/heart_5.jpg" />
+                </Space>
+              </div>
+            </td>
+            <td>
+              {
+                loginPersonListItems[7] != undefined
+                  ?
+                  <>
+                    <Avatar style={{ '--size': '32px', display: 'inline-flex' }} src={demoAvatarImages[0]} />
+                    <div>{loginPersonListItems[7].name}</div>
+                  </>
+                  :
+                  <div style={{ width: '32px' }} />
+              }
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {
+                loginPersonListItems[2] != undefined
+                  ?
+                  <>
+                    <Avatar style={{ '--size': '32px', display: 'inline-flex' }} src={demoAvatarImages[0]} />
+                    <div>{loginPersonListItems[2].name}</div>
+                  </>
+                  :
+                  <div style={{ width: '32px' }} />
+              }
+            </td>
+            <td>
+              {
+                loginPersonListItems[8] != undefined
+                  ?
+                  <>
+                    <Avatar style={{ '--size': '32px', display: 'inline-flex' }} src={demoAvatarImages[0]} />
+                    <div>{loginPersonListItems[8].name}</div>
+                  </>
+                  :
+                  <div style={{ width: '32px' }} />
+              }
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <Avatar style={{ '--size': '32px', display: 'inline-flex' }} src={demoAvatarImages[0]} />
+              <div>{loginPersonListItems[1] != undefined ? loginPersonListItems[1].name : ''}</div>
+            </td>
+            <td style={{ width: '60%', height: '100px', textAlign: 'center' }}>
+              <Space>
+                <img className={styles.personpokerimg} src="/public/img/poker/diamond_1.jpg"></img>
+                <img className={styles.personpokerimg} src="/public/img/poker/diamond_2.jpg"></img>
               </Space>
-            </div>
-
-          </td><td>13</td></tr>
-          <tr><td>21</td><td>23</td></tr>
-          <tr><td>31</td><td style={{ width: '60%', height: '100px', textAlign: 'center' }}>
-            <Space>
-              <img src="/public/img/poker/diamond_1.jpg" width="42" height="42"></img>
-              <img src="/public/img/poker/diamond_2.jpg" width="42" height="42"></img>
-            </Space>
-          </td><td>33</td></tr>
+            </td>
+            <td>
+              {
+                loginPersonListItems[9] != undefined
+                  ?
+                  <>
+                    <Avatar style={{ '--size': '32px', display: 'inline-flex' }} src={demoAvatarImages[0]} />
+                    <div>{loginPersonListItems[9].name}</div>
+                  </>
+                  :
+                  <div style={{ width: '32px' }} />
+              }
+            </td>
+          </tr>
         </table>
 
       </div>

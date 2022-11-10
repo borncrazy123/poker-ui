@@ -87,3 +87,12 @@ export async function getCurrentDeskPersonList(
     },
   });
 }
+
+export async function getLoginUserInfo(
+) {
+  return request('/api/getLoginUserInfo', {
+    method: 'GET',
+    params: {
+    },
+  });
+}
